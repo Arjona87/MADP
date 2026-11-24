@@ -4,7 +4,7 @@
    No se guardan búsquedas. */
 'use strict';
 
-const CONFIG = { version: '1.1', porTanda: 8 };
+const CONFIG = { version: '1.2', porTanda: 8 };
 const SALUDO = '¡Hola! Soy MADP_Bot, tu asistente para encontrar información en los documentos de la Maestría en Alta Dirección Policial.';
 
 const $ = (s, el = document) => el.querySelector(s);
@@ -155,7 +155,7 @@ async function buscar(texto) {
   const grupos = new Map();
   for (const r of crudos) {
     const clave = r.d.id + '|' + (r.d.modo === 'art' ? 'u' + r.u.i : r.u.p);
-    if (!grupos.has(clave)) grupos.set(clave, { d: r.d, p: r.u.p, v: 0, us: [], frase: false, tambien: [] });
+    if (!grupos.has(clave)) grupos.set(clave, { d: r.d, p: r.u.p, v: 0, us: [], frase: false });
     const g = grupos.get(clave);
     g.vs = (g.vs || []).concat(r.v); g.us.push(r.u); g.frase = g.frase || r.frase;
   }
@@ -164,30 +164,15 @@ async function buscar(texto) {
   const lista = [...grupos.values()].sort((a, b) => b.v - a.v || a.p - b.p);
   for (const g of lista) g.us.sort((a, b) => a.i - b.i);
   const tope = lista.length ? lista[0].v : 0;
-  // texto repetido (el documento resume el mismo caso en dos apartados): se agrupa en un solo resultado
-  const res = [];
-  for (const g of lista.filter(x => x.v >= tope * 0.12)) {
-    const igual = res.find(x => x.d === g.d && parecidos(x.us.map(y => y.txt).join(' '), g.us.map(y => y.txt).join(' ')));
-    if (!igual) { g.firma = g.us[0].txt; res.push(g); continue; }
-    const copia = { p: g.p, u: g.us[0] };
-    if (g.p < igual.p) {                                    // el texto principal es el que aparece primero en el documento
-      igual.tambien.push({ p: igual.p, u: igual.us[0] });
-      Object.assign(igual, { p: g.p, us: g.us, frase: igual.frase || g.frase });
-    } else igual.tambien.push(copia);
+  // párrafo principal de cada página: el primero, en orden de lectura, que tiene la frase o más palabras buscadas
+  for (const g of lista) {
+    const cand = g.us.map(u => ({ u, r: crudos.find(c => c.d === g.d && c.u.i === u.i) }));
+    cand.sort((a, b) => (b.r.frase - a.r.frase) || (b.r.cov - a.r.cov) || (a.u.i - b.u.i));
+    g.principal = cand[0].u;
+    g.otros = g.us.filter(u => u !== g.principal);
   }
-  for (const g of res) g.tambien.sort((a, b) => a.p - b.p);
-  return { q, res, pesos, corregidos, agrupados: res.reduce((a, g) => a + g.tambien.length, 0) };
+  return { q, res: lista.filter(x => x.v >= tope * 0.12), pesos, corregidos };
 }
-function palabrasDe(t) { return new Set(norm(t).split(' ').filter(w => w.length > 2)); }
-// mismo texto: al menos el 90% de las palabras del texto más corto están en el otro (mínimo 15 palabras distintas) y el largo no difiere más del doble
-function parecidos(a, b) {
-  if (Math.min(a.length, b.length) < 80 || Math.min(a.length, b.length) / Math.max(a.length, b.length) < 0.5) return false;
-  const A = palabrasDe(a), B = palabrasDe(b);
-  if (Math.min(A.size, B.size) < 15) return false;          // celdas de tablas o títulos sueltos no se agrupan
-  let comun = 0; for (const w of A) if (B.has(w)) comun++;
-  return comun / Math.min(A.size, B.size) >= 0.9;
-}
-
 /* ---------- Fragmento con términos resaltados ---------- */
 function marcas(texto, terms, frases) {
   const p = plano(texto), pos = [];
@@ -280,31 +265,21 @@ function acciones() {
   const voz = 'speechSynthesis' in window ? '<button type="button" data-acc="voz">Escuchar</button>' : '';
   return `<div class="acciones">${voz}<button type="button" data-acc="pdf">Descargar PDF</button></div>`;
 }
-const MAXPAR = 3;
-function bloqueParrafo(d, u, q, terms, anterior, oculto) {
-  const frases = [...q.frases, q.fraseLibre];
-  const completo = u.txt.length > CORTO || u.cont >= 0;
-  const parte = u.parte && u.parte !== anterior ? `<div class="par-parte">${esc(u.parte)}</div>` : '';
-  return `<div class="par${oculto ? ' par-oculto' : ''}"${oculto ? ' hidden' : ''}>${parte}<div class="frag">${fragmento(u.txt, terms, frases)}</div>
-    ${completo ? `<button type="button" class="btn-ver" data-d="${d.id}" data-i="${u.i}">Ver párrafo completo${u.cont >= 0 ? ` <small>(continúa en la ${esc(pagTxt(d, unidad(d, u.cont).p).replace(/^Pág\./, 'pág.').replace(/ \(PDF (\d+)\)$/, ' · PDF $1'))})</small>` : ''}</button><div class="txt"></div>` : ''}</div>`;
-}
 function tarjeta(g, q, terms) {
-  const d = g.d, u = g.us[0];
+  const d = g.d, u = g.principal;
+  const frases = [...q.frases, q.fraseLibre];
   const conFrase = g.frase && q.fraseLibre;
   const pal = q.frases.length ? q.frases.join(' ') : (conFrase ? q.fraseLibre : q.palabrasVisor.join(' '));
-  const literal = q.frases.length === 1 && !q.libres.length || conFrase ? '1' : '';
-  const irTxt = (p, uu) => d.modo === 'art' && uu.sec ? `Ir al ${uu.sec.replace(/^Artículo/, 'artículo')} (${pagTxt(d, p).replace(/^Pág\./, 'pág.')})` : '';
-  let ant = '';
-  const pars = g.us.map((x, k) => { const h = bloqueParrafo(d, x, q, terms, ant, k >= MAXPAR); ant = x.parte; return h; }).join('');
-  const demas = g.us.length > MAXPAR ? `<button type="button" class="btn-demas">Ver los demás (${g.us.length - MAXPAR})</button>` : '';
-  const tambien = g.tambien.length ? `<div class="tambien"><b>Este mismo texto aparece también en:</b>${g.tambien.map(t =>
-      `<div class="tb-fila"><span>${esc(pagTxt(d, t.p))} · ${esc(t.u.sec || t.u.cap || '')}${t.u.sen ? ' › ' + esc(t.u.sen) : ''}</span>${botonIr(d, t.p, pal, 'Ir a la ' + pagTxt(d, t.p).replace(/^Pág\./, 'pág.'), literal)}</div>`).join('')}</div>` : '';
-  return `<div class="resultado">
+  const literal = (q.frases.length === 1 && !q.libres.length) || conFrase ? '1' : '';
+  const irTxt = d.modo === 'art' && u.sec ? `Ir al ${u.sec.replace(/^Artículo/, 'artículo')} (${pagTxt(d, u.p).replace(/^Pág\./, 'pág.')})` : '';
+  const n = g.otros.length, lugar = d.modo === 'art' ? 'disposición' : 'página';
+  return `<div class="resultado" data-d="${d.id}" data-i="${u.i}" data-otros="${g.otros.map(x => x.i).join(',')}">
     <div class="ruta">${ruta(d, u)}</div>
-    <div class="ref">${esc(u.sen ? (u.sec || u.cap) : (u.sec || u.cap || d.corto))} <span class="pag-chip">${esc(pagTxt(d, g.p))}</span>${g.us.length > 1 ? ` <span class="n-par">${g.us.length} párrafos</span>` : ''}</div>
-    ${pars}${demas}
-    <div class="res-acc">${botonIr(d, g.p, pal, irTxt(g.p, u), literal)}${botonSentencia(d, u.sen)}</div>
-    ${tambien}</div>`;
+    <div class="ref">${esc(u.sen ? (u.sec || u.cap) : (u.sec || u.cap || d.corto))} ${u.parte ? `<span class="parte">· ${esc(u.parte)}</span>` : ''} <span class="pag-chip">${esc(pagTxt(d, u.p))}</span></div>
+    <div class="frag">${fragmento(u.txt, terms, frases)}</div>
+    ${n ? `<button type="button" class="lnk-mas">${n} coincidencia${n > 1 ? 's' : ''} más en esta ${lugar}</button>` : ''}
+    <div class="res-acc">${botonIr(d, u.p, pal, irTxt, literal)}<button type="button" class="btn-ver">Ver párrafo completo</button>${botonSentencia(d, u.sen)}</div>
+    <div class="txt"></div></div>`;
 }
 const BUSQ = new Map(); let nBusq = 0;
 async function responderBusqueda(texto, { faq = null } = {}) {
@@ -316,7 +291,7 @@ async function responderBusqueda(texto, { faq = null } = {}) {
   const nDocs = new Set(r.res.map(x => x.d.id)).size;
   const filtro = E.sel.size < E.docs.length ? ` · buscando en ${E.sel.size} de ${E.docs.length} documentos` : '';
   const m = burbuja(`<span class="etq">Resultados de búsqueda</span>
-    <div class="res-cab"><h2>«${esc(texto)}»</h2><span class="total">${r.res.length} resultado${r.res.length > 1 ? 's' : ''} en ${nDocs} documento${nDocs > 1 ? 's' : ''}${filtro}${r.agrupados ? ` · ${r.agrupados} página${r.agrupados > 1 ? 's' : ''} con texto repetido agrupada${r.agrupados > 1 ? 's' : ''}` : ''}</span></div>
+    <div class="res-cab"><h2>«${esc(texto)}»</h2><span class="total">${r.res.length} resultado${r.res.length > 1 ? 's' : ''} en ${nDocs} documento${nDocs > 1 ? 's' : ''}${filtro}</span></div>
     ${r.corregidos.length ? `<p class="sug-dif">También incluí palabras parecidas, por si hubo un error de escritura.</p>` : ''}
     ${faq ? '' : sugerenciasHTML(texto)}
     <div class="lista" data-busq="${id}"></div>
@@ -467,21 +442,8 @@ function saludo() {
 document.addEventListener('click', async ev => {
   const ir = ev.target.closest('[data-ir]');
   if (ir) { abrirVisor(ir.dataset.ir, +ir.dataset.p, ir.dataset.q, ir.dataset.f === '1'); return; }
-  const dm = ev.target.closest('.btn-demas');
-  if (dm) { dm.closest('.resultado').querySelectorAll('.par-oculto').forEach(x => { x.hidden = false; }); dm.remove(); return; }
-  const v = ev.target.closest('.btn-ver');
-  if (v) {
-    const caja = v.nextElementSibling, frag = v.parentElement.querySelector('.frag');
-    if (caja.innerHTML) { caja.innerHTML = ''; frag.hidden = false; v.firstChild.textContent = 'Ver párrafo completo'; return; }
-    const d = E.docMap[v.dataset.d], { texto, hasta } = parrafoCompleto(d, +v.dataset.i);
-    const b = BUSQ.get(+v.closest('.lista').dataset.busq);
-    const terms = b ? new Set(b.pesos.keys()) : new Set(), frases = b ? [...b.q.frases, b.q.fraseLibre] : [];
-    const u = unidad(d, +v.dataset.i);
-    caja.innerHTML = `<div class="texto-completo">${pintar(texto, marcas(texto, terms, frases), 0, texto.length)}</div>
-      <div class="meta">Párrafo completo · ${esc(pagTxt(d, u.p, hasta !== u.p ? hasta : null))}</div>`;
-    frag.hidden = true; v.firstChild.textContent = 'Ocultar párrafo completo';
-    return;
-  }
+  const v = ev.target.closest('.btn-ver, .lnk-mas');
+  if (v) { abrirRecuadro(v); return; }
   const mas = ev.target.closest('[data-mas]');
   if (mas) { mostrarMas(+mas.dataset.mas, mas.closest('.lista')); return; }
   const toc = ev.target.closest('[data-toc]');
@@ -506,6 +468,29 @@ document.addEventListener('change', ev => {
   if (c.checked) E.sel.add(c.value); else E.sel.delete(c.value);
   guardarSel(); pintarFiltro();
 });
+
+/* ---------- Recuadro blanco: párrafo completo u otras coincidencias de la página ---------- */
+function abrirRecuadro(btn) {
+  const tar = btn.closest('.resultado'), caja = tar.querySelector('.txt');
+  const modo = btn.classList.contains('lnk-mas') ? 'otros' : 'completo';
+  const verBtn = tar.querySelector('.btn-ver');
+  if (caja.dataset.modo === modo) { caja.innerHTML = ''; caja.dataset.modo = ''; verBtn.textContent = 'Ver párrafo completo'; return; }
+  const d = E.docMap[tar.dataset.d];
+  const b = BUSQ.get(+tar.closest('.lista').dataset.busq);
+  const terms = b ? new Set(b.pesos.keys()) : new Set(), frases = b ? [...b.q.frases, b.q.fraseLibre] : [];
+  const bloque = (i, titulo) => {
+    const u = unidad(d, i), { texto, hasta } = parrafoCompleto(d, i);
+    return `<div class="texto-completo">${pintar(texto, marcas(texto, terms, frases), 0, texto.length)}</div>
+      <div class="leyenda">${titulo} · ${esc(pagTxt(d, u.p, hasta !== u.p ? hasta : null))}${u.parte ? ' · ' + esc(u.parte) : ''}</div>`;
+  };
+  if (modo === 'completo') { caja.innerHTML = bloque(+tar.dataset.i, 'Párrafo completo'); verBtn.textContent = 'Ocultar párrafo'; }
+  else {
+    const otros = tar.dataset.otros.split(',').filter(Boolean);
+    caja.innerHTML = otros.map((x, k) => bloque(+x, otros.length > 1 ? `Otra coincidencia (${k + 1} de ${otros.length})` : 'Otra coincidencia en esta página')).join('');
+    verBtn.textContent = 'Ver párrafo completo';
+  }
+  caja.dataset.modo = modo;
+}
 
 /* ---------- Leer en voz alta (voz del propio dispositivo) ---------- */
 let leyendo = null;
@@ -533,8 +518,7 @@ function imprimir(b) {
     <span style="font-size:9pt">Generado el ${hoy} · Base de documentos al ${esc(E.corte)}</span></div><img src="assets/logo-cges.png" alt=""></div>
     ${b.innerHTML}<div class="imp-pie">Texto tomado literalmente de los documentos cargados en MADP_Bot. Verifica siempre en la página indicada del documento original.</div>`;
   z.querySelectorAll('.txt').forEach(x => { if (!x.innerHTML) x.remove(); });
-  z.querySelectorAll('.res-acc, .btn-mas, .btn-ver, .btn-demas, .tb-fila .btn-ir').forEach(x => x.remove());
-  z.querySelectorAll('[hidden]').forEach(x => { x.hidden = false; });
+  z.querySelectorAll('.res-acc, .btn-mas, .lnk-mas').forEach(x => x.remove());
   document.body.classList.add('imprimiendo');
   const fin = () => { document.body.classList.remove('imprimiendo'); z.innerHTML = ''; window.removeEventListener('afterprint', fin); };
   window.addEventListener('afterprint', fin);

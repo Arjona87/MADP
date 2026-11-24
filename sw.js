@@ -1,6 +1,6 @@
 /* MADP_Bot · Service worker: funciona sin conexión después de la primera visita.
    construir_base.py actualiza VERSION y DOCUMENTOS en cada reconstrucción para que los dispositivos descarguen la base nueva. */
-const VERSION = '202611241701';
+const VERSION = '202611241723';
 const DOCUMENTOS = ["documentos/001_CDJ_Control_preventivo_provisional.pdf"];
 const CASCARA = 'madp-cascara-' + VERSION;
 const DATOS = 'madp-datos-' + VERSION;
@@ -12,8 +12,10 @@ const VISOR = ['visor/web/viewer.html', 'visor/web/viewer.mjs', 'visor/web/viewe
   'visor/web/locale/locale.json', 'visor/web/locale/es-MX/viewer.ftl', 'visor/web/locale/en-US/viewer.ftl'];
 
 self.addEventListener('install', e => {
-  e.waitUntil(caches.open(CASCARA).then(c => c.addAll(ESENCIALES))
-    .then(() => caches.open(DATOS)).then(async c => { for (const u of [...VISOR, ...DOCUMENTOS]) { try { await c.add(u); } catch (err) {} } })
+  // cache: 'reload' obliga a descargar del servidor (no de la memoria del navegador): así nunca se mezclan datos viejos con la app nueva
+  const fresco = u => new Request(u, { cache: 'reload' });
+  e.waitUntil(caches.open(CASCARA).then(c => c.addAll(ESENCIALES.map(fresco)))
+    .then(() => caches.open(DATOS)).then(async c => { for (const u of [...VISOR, ...DOCUMENTOS]) { try { await c.add(fresco(u)); } catch (err) {} } })
     .then(() => self.skipWaiting()));
 });
 self.addEventListener('activate', e => {

@@ -673,8 +673,8 @@
   }
 
 .textLayer .highlight{
-    --highlight-bg-color:rgb(180 0 170 / 0.25);
-    --highlight-selected-bg-color:rgb(0 100 0 / 0.25);
+    --highlight-bg-color:rgb(255 230 0 / 0.55);
+    --highlight-selected-bg-color:rgb(255 170 0 / 0.65);
     --highlight-backdrop-filter:none;
     --highlight-selected-backdrop-filter:none;
   }

@@ -89,7 +89,7 @@ main{flex:1;width:100%;max-width:880px;margin:0 auto;padding:16px 12px 8px}
 .resultado .ref{font-weight:700;color:var(--violeta-900)}
 .resultado .meta{font-size:.82em;color:var(--tenue)}
 .resultado .frag{margin:.4em 0;font-size:.95em}
-.resultado mark{background:#EBDDFB;color:inherit;border-radius:3px;padding:0 2px}
+.resultado mark,.texto-completo mark{background:#FFE600;color:#1C1330;font-weight:700;border-radius:3px;padding:0 2px}
 .texto-completo{white-space:pre-wrap;font-size:.92em;margin-top:6px;background:#fff;border:1px solid var(--linea);border-radius:8px;padding:10px;max-height:420px;overflow:auto}
 .nota-ref{color:var(--tenue-2);font-size:.85em}
 .acciones{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
@@ -224,19 +224,10 @@ details.cat button.sug{display:block;width:100%}
 @media (max-width:560px){.visor-barra{flex-wrap:wrap}.visor-tit{order:-1;flex-basis:100%}.v-btn{flex:1;text-align:center}}
 body.visor-abierto{overflow:hidden}
 
-/* v1.1: párrafos por página, párrafo completo y textos repetidos */
-.resultado .par{border-top:1px dashed #E4DCF0;padding-top:6px;margin-top:6px}
-.resultado .par:first-of-type{border-top:0;padding-top:0}
-.par-parte{font-size:.78em;font-weight:700;color:var(--violeta);text-transform:uppercase;letter-spacing:.03em;margin-bottom:2px}
-.n-par{font-family:var(--f-cifra);font-size:.75em;color:var(--tenue)}
-.resultado .btn-ver small{font-weight:500;color:var(--tenue);text-decoration:none}
-.texto-completo{background:#fff;border:1px solid var(--linea);border-radius:8px;padding:8px 10px;margin-top:4px;line-height:1.55}
-.resultado .txt .meta{font-size:.78em;color:var(--tenue);font-family:var(--f-cifra);margin-top:2px}
-.btn-demas{margin-top:6px;border:1px dashed var(--violeta);background:#fff;color:var(--violeta);border-radius:8px;padding:4px 10px;font-weight:700;font-size:.84em}
-.tambien{margin-top:8px;background:#FBF9FE;border:1px solid #E4DCF0;border-radius:8px;padding:6px 10px;font-size:.86em}
-.tambien b{display:block;color:var(--violeta-900);margin-bottom:2px}
-.tb-fila{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px;padding:3px 0;border-top:1px solid #F1ECF7}
-.tb-fila:first-of-type{border-top:0}
-.tb-fila span{font-family:var(--f-cifra);font-size:.92em;color:var(--tenue)}
-.tb-fila .btn-ir{padding:3px 10px;font-size:.82em}
-@media print{.par-oculto{display:block!important}}
+
+/* v1.2: otras coincidencias y párrafo completo en el recuadro blanco */
+.lnk-mas{display:inline;border:0;background:none;padding:0;margin:0;font:inherit;font-size:.82em;color:var(--tenue);text-decoration:underline;text-underline-offset:2px;cursor:pointer}
+.lnk-mas:hover,.lnk-mas:focus-visible{color:var(--violeta)}
+.texto-completo{background:#fff;border:1px solid var(--linea);border-radius:8px;padding:8px 10px;margin-top:6px;line-height:1.55}
+.resultado .txt .leyenda{font-size:.78em;color:var(--tenue);font-family:var(--f-cifra);margin:3px 0 2px}
+@media print{.resultado mark,.texto-completo mark{background:#FFE600!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
