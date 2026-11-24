@@ -1,6 +1,6 @@
 /* MADP_Bot · Service worker: funciona sin conexión después de la primera visita.
    construir_base.py actualiza VERSION y DOCUMENTOS en cada reconstrucción para que los dispositivos descarguen la base nueva. */
-const VERSION = '202611241518';
+const VERSION = '202611241701';
 const DOCUMENTOS = ["documentos/001_CDJ_Control_preventivo_provisional.pdf"];
 const CASCARA = 'madp-cascara-' + VERSION;
 const DATOS = 'madp-datos-' + VERSION;

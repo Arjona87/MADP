@@ -1,4 +1,4 @@
-# MADP_Bot · v1.0
+# MADP_Bot · v1.1
 
 Buscador privado de los documentos de la **Maestría en Alta Dirección Policial**. Se escriben palabras clave (o una pregunta) y MADP_Bot muestra en qué documento y en qué página aparecen. Con un clic abre el documento **en esa página**, dentro de la propia app y con las palabras resaltadas.
 Funciona **sin conexión** después de la primera visita y se puede instalar en el teléfono o la computadora. Misma identidad visual que el Asistente UIG (CGES/DGAPP/AA).

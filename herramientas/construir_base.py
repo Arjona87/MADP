@@ -127,31 +127,41 @@ def limpiar_titulo(t):
 PARTES = re.compile(r'^(Hechos del caso|Problemas? jur[íi]dicos? planteados?|Criterios? de la Suprema Corte|Justificaci[óo]n de(?:l| los) criterios?(?: jur[íi]dicos?)?|Decisi[óo]n)\s*$')
 
 def parrafos_pagina(txt, quitar):
-    lineas = [l.rstrip() for l in txt.split('\n')]
-    lineas = [l for l in lineas if l.strip() and l.strip() not in quitar and not NUM_PAG.match(l)]
+    """Párrafos de una página. Corta en: renglón en blanco (pdftotext separa así los bloques: párrafos, notas al pie,
+    celdas), renglón corto que cierra con puntuación, y encabezados de las partes de cada sentencia."""
+    crudas = [l.rstrip() for l in txt.split('\n')]
+    lineas = [l for l in crudas if l.strip() and l.strip() not in quitar and not NUM_PAG.match(l)]
     if not lineas:
         return []
-    largo = max(len(l) for l in lineas)
-    pars, buf = [], ''
-    for i, l in enumerate(lineas):
+    # ancho normal de renglón (percentil 85); el máximo no sirve porque las notas al pie, en letra menor, son más largas
+    largos = sorted(len(l) for l in lineas if len(l.strip()) > 40) or [max(len(l) for l in lineas)]
+    largo = largos[int(len(largos) * 0.85) - 1 if len(largos) > 1 else 0]
+    pars, buf, capital = [], '', ''
+    def cerrar():
+        nonlocal buf
+        if buf: pars.append(buf)
+        buf = ''
+    for l in crudas:
         s = l.strip()
-        es_parte = bool(PARTES.match(s))
-        if es_parte:
-            if buf: pars.append(buf); buf = ''
-            pars.append('§' + s); continue
+        if not s:
+            cerrar(); continue                                   # renglón en blanco = fin de bloque
+        if s in quitar or NUM_PAG.match(l):
+            continue
+        if re.fullmatch(r'[A-ZÁÉÍÓÚÑ]', s) and not buf:           # letra capital («E» + «l derecho…»)
+            capital = s; continue
+        if capital:
+            s = capital + s; capital = ''
+        if PARTES.match(s):
+            cerrar(); pars.append('§' + s); continue
         if buf:
-            if buf.endswith('-') and not buf.endswith(' -'):
-                buf = buf[:-1] + s
-            else:
-                buf += ' ' + s
+            buf = buf[:-1] + s if (buf.endswith('-') and not buf.endswith(' -')) else buf + ' ' + s
         else:
             buf = s
         corta = len(l) < largo * 0.8
         fin = re.search(r'[\.\:;"”»\)]\s*$', s) or (len(s) < 60 and not re.search(r'[,a-záéíóúñ]$', s))
         if corta and fin:
-            pars.append(buf); buf = ''
-    if buf:
-        pars.append(buf)
+            cerrar()
+    cerrar()
     return pars
 
 # ---------------------------------------------------------------- segmentación por página (cuadernos, libros, Word…)
@@ -214,10 +224,30 @@ def por_pagina(pags, labels, toc):
                 continue
             if not buf: ini_estado = dict(estado)
             buf.append(par)
-            if sum(len(x) for x in buf) >= 380:
-                cerrar(); buf = []
+            cerrar(); buf = []          # un fragmento = un párrafo del documento
         cerrar()
+    enlazar_continuaciones(units)
     return units
+
+TERMINAL = re.compile(r'[\.\:;"”»\)\?!]\s*$')
+
+def enlazar_continuaciones(units):
+    """Párrafos partidos por un salto de página: el último párrafo de una página que no termina en punto se
+    enlaza con el primero de la página siguiente (campo 7 = índice del fragmento que lo continúa, o -1)."""
+    for u in units:
+        u.append(-1)
+    primero = {}
+    for k, u in enumerate(units):
+        primero.setdefault(u[0], k)
+    for k, u in enumerate(units):
+        sig = primero.get(u[0] + 1)
+        if sig is None: continue
+        # sólo los dos últimos párrafos de la página (el último puede ser una nota al pie); la página siguiente
+        # debe empezar en minúscula, señal de que el párrafo sigue
+        ultimos = [j for j in range(primero[u[0]], sig) if units[j][0] == u[0]][-2:]
+        if k not in ultimos or TERMINAL.search(u[6]) or any(units[j][7] >= 0 for j in ultimos): continue
+        if re.match(r'^[a-záéíóúñü]', units[sig][6]):
+            u[7] = sig
 
 def indice_ordenado(toc):
     """Índice del PDF en orden de páginas, con nivel 0 (capítulo), 1 (apartado) o 2 (sentencia)."""
@@ -267,10 +297,10 @@ def por_articulo(pags, labels):
         vistos[et] = vistos.get(et, 0) + 1
         if vistos[et] > 1: et += f' [{vistos[et]}]'
         p = pag_de(m.start())
-        units.append([p, labels[p - 1], '', et, '', '', cuerpo])
+        units.append([p, labels[p - 1], '', et, '', '', cuerpo, -1])
     if fin_txt:
         p = pag_de(fin_txt.start())
-        units.append([p, labels[p - 1], '', 'Transitorios', '', '', re.sub(r'\s+', ' ', todo[fin_txt.start():]).strip()])
+        units.append([p, labels[p - 1], '', 'Transitorios', '', '', re.sub(r'\s+', ' ', todo[fin_txt.start():]).strip(), -1])
     return units
 
 # ---------------------------------------------------------------- Excel
@@ -345,7 +375,7 @@ def main():
         textos[nid] = units
         di = len(docs) - 1
         for ui, u in enumerate(units):
-            p, lp, cap, sec, sen, parte, txt = u
+            p, lp, cap, sec, sen, parte, txt = u[:7]
             lista.append((di, ui, tokens(txt) + tokens(sec + ' ' + sen)))
         print(f'#{nid}  {modo}  {len(pags)} páginas  ·  {len(units)} fragmentos  ·  {len(toc)} entradas de índice  ·  {len(sents)} sentencias enlazadas')
     post = defaultdict(list); dl = []; ref = []

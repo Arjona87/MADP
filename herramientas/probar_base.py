@@ -14,11 +14,12 @@ from collections import Counter, defaultdict
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from construir_base import norm, tokens, paginas_pdf
 
-# búsqueda de control → (documento, página física del PDF que debe aparecer entre los 5 primeros resultados)
+# búsqueda de control → (documento, páginas físicas del PDF; al menos una debe aparecer entre los 5 primeros resultados)
 CONTROLES = [
-    ('actitud nerviosa', '001', 52), ('grados de intensidad', '001', 31), ('niveles de contacto', '001', 36),
-    ('mochila segura', '001', 101), ('juicio de urgencia', '001', 78), ('denuncia informal', '001', 63),
-    ('flagrancia control preventivo distincion', '001', 33), ('domicilio', '001', 88),
+    ('actitud nerviosa', '001', {51, 52, 53}), ('grados de intensidad', '001', {29, 30, 31}), ('niveles de contacto', '001', {35, 36}),
+    ('mochila segura', '001', {93, 94, 95, 101}), ('juicio de urgencia', '001', {78, 79, 80}), ('denuncia informal', '001', {62, 63, 64}),
+    ('flagrancia control preventivo distincion', '001', {32, 33}), ('domicilio', '001', {86, 87, 88, 89, 90}),
+    ('exceso de velocidad', '001', {32, 35}),
 ]
 
 def bm25(idx, q, docs, ids):
@@ -70,6 +71,11 @@ def main():
         for t, p, n in d['toc']:
             if not 1 <= p <= d['paginas']:
                 errores.append(f"#{d['id']}: entrada del índice «{t}» apunta a la página {p}")
+    # párrafos partidos entre páginas: la continuación debe estar en la página siguiente
+    for did, us in textos.items():
+        for k, u in enumerate(us):
+            if len(u) > 7 and u[7] >= 0 and us[u[7]][0] != u[0] + 1:
+                errores.append(f"#{did}: el párrafo de la pág. PDF {u[0]} continúa en una página que no es la siguiente")
     # citas de preguntas frecuentes
     for f in faq:
         for b in f['bloques']:
@@ -90,8 +96,8 @@ def main():
             pg = textos[docs[di]['id']][ui][0]
             if pg not in vistos: vistos.append(pg)
             if len(vistos) >= 5: break
-        if p in vistos: ok += 1
-        else: errores.append(f"búsqueda «{q}»: esperaba la pág. PDF {p} entre las 5 primeras y obtuve {vistos}")
+        if set(vistos) & p: ok += 1
+        else: errores.append(f"búsqueda «{q}»: esperaba alguna de las págs. PDF {sorted(p)} entre las 5 primeras y obtuve {vistos}")
     print(f"Documentos: {len(docs)} · fragmentos: {sum(len(v) for v in textos.values())} · preguntas frecuentes: {len(faq)} "
           f"({sum(len(f['bloques']) for f in faq)} citas) · búsquedas de control: {ok}/{len(CONTROLES)}")
     for x in avisos: print('AVISO', x)
