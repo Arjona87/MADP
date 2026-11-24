@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MADP_Bot</title>
+<meta name="description" content="MADP_Bot: buscador privado de los documentos de la Maestría en Alta Dirección Policial, con salto a la página exacta.">
+<meta name="theme-color" content="#3A1560">
+<meta name="referrer" content="no-referrer">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="MADP_Bot">
+<link rel="stylesheet" href="assets/fuentes.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="saltar" href="#entrada">Ir a escribir tu búsqueda</a>
+
+<header class="cab" id="cab">
+  <div class="cab-id">
+    <img class="cab-avatar" src="assets/violeta-96.webp" alt="" width="40" height="40">
+    <div class="cab-tit"><b>MADP_Bot</b><span>Asistente virtual · Maestría en Alta Dirección Policial · v1.0</span></div>
+  </div>
+  <div class="cab-ajustes" id="cabAjustes">
+    <button class="btn-ajuste" id="btnDocs" type="button">Documentos</button>
+    <button class="btn-ajuste" id="btnFacil" type="button" role="switch" aria-checked="false">Lectura fácil</button>
+    <button class="btn-ajuste" id="btnTexto" type="button" aria-label="Aumentar tamaño de letra">A+</button>
+  </div>
+  <button class="btn-menu" id="btnMenu" type="button" aria-expanded="false" aria-controls="cabAjustes">Ajustes</button>
+  <img class="cab-logo" src="assets/logo-cges.png" alt="Coordinación General Estratégica de Seguridad, Gobierno de Jalisco" height="34">
+</header>
+
+<div class="aviso-red" id="avisoRed" role="status" hidden></div>
+
+<main id="principal">
+  <section class="chat" id="chat" aria-live="polite" aria-relevant="additions" aria-label="Conversación con MADP_Bot"></section>
+</main>
+
+<div class="sugerencias" id="sugerencias" aria-label="Accesos rápidos"></div>
+
+<div class="filtro" id="filtro">
+  <button type="button" id="btnFiltro" aria-expanded="false" aria-controls="panelFiltro">Buscar en: <b id="filtroTxt">todos los documentos</b> <span aria-hidden="true">▾</span></button>
+  <div class="panel-filtro" id="panelFiltro" hidden></div>
+</div>
+
+<form class="entrada" id="formEntrada" autocomplete="off" role="search">
+  <label for="entrada" class="oculto-sr">Escribe palabras clave o una pregunta</label>
+  <textarea id="entrada" rows="1" maxlength="400" placeholder="Escribe palabras clave o una pregunta…" enterkeyhint="search"></textarea>
+  <button type="submit" class="btn-enviar">Buscar</button>
+</form>
+
+<div class="visor" id="visor" role="dialog" aria-modal="true" aria-labelledby="visorTit" hidden>
+  <div class="visor-barra" id="visorBarra">
+    <button type="button" class="v-btn v-cerrar" id="vCerrar" aria-label="Cerrar visor">✕ Cerrar</button>
+    <div class="visor-tit"><b id="visorTit"></b><span id="visorPag"></span></div>
+    <button type="button" class="v-btn" id="vCompleta">Pantalla completa</button>
+    <a class="v-btn v-prim" id="vIr" href="#" target="_blank" rel="noopener">Ir al PDF</a>
+  </div>
+  <button type="button" class="v-salir-completa" id="vSalirCompleta" hidden>Salir de pantalla completa</button>
+  <iframe id="visorMarco" title="Visor de documentos PDF" allow="fullscreen"></iframe>
+</div>
+
+<div class="instalar" id="instalar" role="dialog" aria-labelledby="instTit" hidden>
+  <img src="assets/violeta-96.webp" alt="" width="44" height="44">
+  <div><b id="instTit">Instala MADP_Bot</b><span id="instTxt">Quedará en tu dispositivo y funcionará sin internet.</span></div>
+  <button type="button" id="instSi" class="btn-prim">Instalar</button>
+  <button type="button" id="instNo" class="btn-sec" aria-label="Ahora no">Ahora no</button>
+</div>
+
+<div id="zonaImpresion" aria-hidden="true"></div>
+
+<script src="app.js" defer></script>
+</body>
+</html>

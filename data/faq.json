@@ -1,0 +1,500 @@
+{
+ "nota": "Preguntas frecuentes de MADP_Bot: cada respuesta es texto literal del documento citado, con su página.",
+ "categorias": [
+  [
+   "concepto",
+   "Concepto, grados y niveles"
+  ],
+  [
+   "sospecha",
+   "Sospecha razonable"
+  ],
+  [
+   "inspeccion",
+   "Inspección de vehículos, personas y domicilio"
+  ],
+  [
+   "similares",
+   "Figuras similares"
+  ]
+ ],
+ "faq": [
+  {
+   "id": "que_es",
+   "cat": "concepto",
+   "q": "¿Qué es el control preventivo provisional?",
+   "v": [
+    "qué es control preventivo provisional",
+    "definición de control preventivo provisional",
+    "concepto de control preventivo"
+   ],
+   "kw": "que es definicion concepto control preventivo provisional naturaleza afectacion momentanea libertad personal restriccion temporal",
+   "facil": [
+    "Es una limitación breve y momentánea de la libertad de una persona, que no equivale a detenerla.",
+    "No está escrita en la Constitución: la creó la Suprema Corte al interpretar el derecho a la libertad personal.",
+    "Su fundamento es el artículo 21 constitucional y sólo es válida si hay una sospecha razonable."
+   ],
+   "bloques": [
+    {
+     "texto": "Ahora bien, la Constitución General no menciona al control preventivo provisional como una forma de restringir el derecho a la libertad personal, sino que dicha figura se deriva de la interpretación constitucional que ha realizado la Suprema Corte de Justicia de la Nación sobre el derecho a la libertad personal. El control preventivo provisional constituye una afectación momentánea al derecho a la libertad personal que está autorizada por la Constitución.",
+     "d": "001",
+     "p": 18,
+     "et": "2",
+     "sec": "Consideraciones generales",
+     "sen": "",
+     "parte": ""
+    },
+    {
+     "texto": "En efecto, el control preventivo provisional es una restricción temporal o momentánea a la libertad deambulatoria o de movimiento, autorizado constitucionalmente no sólo en la prevención y persecución de los delitos, sino también en su investigación.",
+     "d": "001",
+     "p": 28,
+     "et": "12",
+     "sec": "1.1 Elementos del control preventivo provisional",
+     "sen": "AI 10/2014 y acumulada 11/2014",
+     "parte": "Criterio de la Suprema Corte"
+    },
+    {
+     "texto": "Otro de los elementos del control preventivo provisional es que tiene su fundamento en el artículo 21 de la Constitución, ya que sus principales objetivos son la prevención del delito y la consecución de la seguridad pública. Por ello, únicamente puede ser aplicado en los ámbitos de la prevención, investigación y persecución de los delitos. El control preventivo provisional forma parte de las funciones otorgadas por la Constitución a la policía para la investigación de los delitos. No es arbitrario, en tanto se justifica en la sospecha razonable.",
+     "d": "001",
+     "p": 99,
+     "et": "83",
+     "sec": "Consideraciones finales",
+     "sen": "",
+     "parte": ""
+    }
+   ]
+  },
+  {
+   "id": "parametros",
+   "cat": "concepto",
+   "q": "¿Qué datos debe aportar la autoridad para justificar un control preventivo provisional?",
+   "v": [
+    "parámetros constitucionales del control preventivo",
+    "requisitos del control preventivo provisional",
+    "qué debe acreditar la autoridad que detiene"
+   ],
+   "kw": "parametros requisitos datos aportar autoridad justificar detencion hechos narrados lugar razones agentes militares",
+   "facil": [
+    "La autoridad debe probar que los hechos ocurrieron y explicar cómo detuvo a la persona.",
+    "Debe decir qué hizo para detener el vehículo, en qué lugar y por qué hizo un control de grado superior."
+   ],
+   "bloques": [
+    {
+     "texto": "La implementación de un control preventivo provisional se debe ceñir a ciertos parámetros constitucionales. En efecto, es necesario que la autoridad que detiene a una persona aporte datos suficientes y necesarios para: i) comprobar que los hechos narrados efectivamente sucedieron, ii) comprobar la manera en que se logró la detención del quejoso, iii) las acciones concretas realizadas para interceptar el vehículo que supuestamente conducía el imputado, iv) el lugar específico en donde se logró la detención y v) las razones que llevaron a los agentes a realizar un control preventivo provisional de grado superior. Esa información no fue aportada de manera suficiente por los agentes militares.",
+     "d": "001",
+     "p": 24,
+     "et": "8",
+     "sec": "1.1 Elementos del control preventivo provisional",
+     "sen": "AR 716/2012",
+     "parte": "Criterio de la Suprema Corte"
+    }
+   ]
+  },
+  {
+   "id": "grados",
+   "cat": "concepto",
+   "q": "¿Cuáles son los grados de intensidad del control preventivo provisional?",
+   "v": [
+    "grado menor y grado superior",
+    "grados del control preventivo",
+    "intensidad del control preventivo"
+   ],
+   "kw": "grados intensidad grado menor superior registro profundo revision ocular superficial",
+   "facil": [
+    "Hay dos grados: menor y superior.",
+    "Grado menor: detener el paso un momento para pedir información y mirar por fuera.",
+    "Grado superior: una revisión más profunda de la persona o del vehículo."
+   ],
+   "bloques": [
+    {
+     "texto": "El control preventivo provisional tiene dos grados: el menor y el superior. El grado menor implica que la autoridad puede limitar provisionalmente el tránsito de personas y/o vehículos con la finalidad de solicitar información. El control preventivo de grado superior permite que la autoridad realice sobre la persona y/o vehículos un registro más profundo, con la finalidad de prevenir algún delito, así como para salvaguardar la integridad y la vida de los propios agentes.",
+     "d": "001",
+     "p": 31,
+     "et": "15",
+     "sec": "1.2 Grados de intensidad del control preventivo provisional",
+     "sen": "AR 716/2012",
+     "parte": "Criterio de la Suprema Corte"
+    },
+    {
+     "texto": "El primero es el control preventivo de grado menor, en el que la autoridad limita provisionalmente el tránsito de personas y/o vehículos para solicitar información relativa a la identidad de la persona, la ruta que realiza o los motivos de su presencia en el lugar específico. Este tipo de control permite una revisión ocular superficial en el exterior de la persona o el interior de algún vehículo.",
+     "d": "001",
+     "p": 99,
+     "et": "83",
+     "sec": "Consideraciones finales",
+     "sen": "",
+     "parte": ""
+    }
+   ]
+  },
+  {
+   "id": "niveles",
+   "cat": "concepto",
+   "q": "¿Cuáles son los niveles de contacto para aplicar el control preventivo provisional?",
+   "v": [
+    "niveles de contacto",
+    "tres niveles de contacto",
+    "niveles de aproximación de la policía"
+   ],
+   "kw": "niveles contacto inmediacion restriccion temporal detencion aproximacion escalada",
+   "facil": [
+    "Primer nivel: el simple acercamiento entre el agente y la persona.",
+    "Segundo nivel: una restricción temporal de un derecho.",
+    "Tercer nivel: la detención. Los niveles se aplican de forma escalonada."
+   ],
+   "bloques": [
+    {
+     "texto": "De acuerdo con la Constitución, el control preventivo provisional requiere de tres niveles de contacto. El primero es el de la simple inmediación entre el agente y la persona; el segundo es la restricción temporal del ejercicio de un derecho y el tercero es la detención como tal. Habrá situaciones en que las restricciones temporales a la libertad personal se conviertan en detenciones, al verificarse en el momento de la restricción la actualización de una conducta delictiva, mientras que en otros casos se agotará la actuación policial en dicha restricción sin que exista detención. Por ello, es necesario distinguir los elementos que justifican los anteriores niveles de aproximación de aquellos que justifican la detención formal.",
+     "d": "001",
+     "p": 36,
+     "et": "20",
+     "sec": "1.4 Niveles de contacto para aplicar el control preventivo provisional",
+     "sen": "ADR 1596/2014",
+     "parte": "Criterio de la Suprema Corte"
+    },
+    {
+     "texto": "De acuerdo con la Constitución, la autoridad debe aplicar los niveles de contacto de manera escalada y en momentos distintos.",
+     "d": "001",
+     "p": 39,
+     "et": "23",
+     "sec": "1.4 Niveles de contacto para aplicar el control preventivo provisional",
+     "sen": "ADR 4086/2015",
+     "parte": "Criterio de la Suprema Corte"
+    }
+   ]
+  },
+  {
+   "id": "flagrancia",
+   "cat": "concepto",
+   "q": "¿En qué se distingue el control preventivo provisional de la flagrancia?",
+   "v": [
+    "diferencia entre control preventivo y flagrancia",
+    "control preventivo vs flagrancia",
+    "es lo mismo flagrancia y control preventivo"
+   ],
+   "kw": "diferencia distincion flagrancia detencion orden aprehension caso urgente control preventivo",
+   "facil": [
+    "La flagrancia es detener a alguien cuando comete el delito o justo después.",
+    "El control preventivo provisional es una restricción momentánea que no es una detención."
+   ],
+   "bloques": [
+    {
+     "texto": "Las actuaciones realizadas en el marco de un control preventivo provisional son restricciones temporales a la libertad personal que sí deben distinguirse de una detención por flagrancia. Los supuestos constitucionales para una detención son la orden de aprehensión, la flagrancia y el caso urgente. Sin embargo, no todo contacto entre una autoridad de seguridad pública y una persona puede o debe catalogarse como una detención. Las competencias propias de los agentes de seguridad pública implican actos de investigación o de prevención del delito que se despliegan previamente a la detención en sentido estricto y se distinguen de ésta. En efecto, esos actos previos son restricciones temporales a la libertad personal que se enmarcan dentro del control preventivo provisional y deben justificarse en consecuencia.",
+     "d": "001",
+     "p": 33,
+     "et": "17",
+     "sec": "1.3 Distinción entre control preventivo provisional y flagrancia",
+     "sen": "ADR 1596/2014",
+     "parte": "Criterio de la Suprema Corte"
+    },
+    {
+     "texto": "En efecto, la flagrancia se da cuando se detiene a la persona en el momento preciso en el que comete el delito o inmediatamente después de haberlo cometido, mientras que el control preventivo provisional es una afectación momentánea al derecho a la libertad personal y a la libertad de movimiento. Dicha afectación está autorizada por la Constitución y no se traduce en la detención de la persona.",
+     "d": "001",
+     "p": 99,
+     "et": "83",
+     "sec": "Consideraciones finales",
+     "sen": "",
+     "parte": ""
+    }
+   ]
+  },
+  {
+   "id": "sospecha",
+   "cat": "sospecha",
+   "q": "¿Qué es la sospecha razonable y por qué es indispensable?",
+   "v": [
+    "sospecha razonable",
+    "elementos de la sospecha razonable",
+    "sospecha razonada y objetiva"
+   ],
+   "kw": "sospecha razonable razonada objetiva subjetiva requisito constitucional estereotipos apariencia carga prueba policia",
+   "facil": [
+    "Es el requisito esencial: sin ella, el control es arbitrario.",
+    "Debe basarse en hechos y datos objetivos, no en corazonadas, apariencia o estereotipos.",
+    "La policía tiene que probar que existía."
+   ],
+   "bloques": [
+    {
+     "texto": "La sospecha razonable sí es un requisito constitucional para que una autoridad pueda revisar a una persona ante la posible comisión de un delito. Para la realización de un control preventivo provisional es necesario que se cumplan ciertos supuestos constitucionales, cuyo requisito esencial es la existencia de una sospecha razonable y objetiva de que se está cometiendo un delito. La sospecha razonada y objetiva se contrapone a la mera sospecha subjetiva que pueda llegar a tener un agente captor frente a ciertos hechos supuestamente constitutivos de delito.",
+     "d": "001",
+     "p": 44,
+     "et": "28",
+     "sec": "2.1 Elementos de la sospecha razonable",
+     "sen": "AR 716/2012",
+     "parte": "Criterio de la Suprema Corte"
+    },
+    {
+     "texto": "1. Las diligencias policiales que consisten en aproximarse a una persona para verificar la existencia de un delito flagrante deben fundarse en una sospecha razonable para ser conformes a los parámetros de la Constitución. La sospecha razonada debe dar cuenta de manera clara y concatenada de los hechos y datos con los que la autoridad que detiene contaba apenas en el momento anterior de su aproximación o acercamiento a la persona. Por tal motivo, la sospecha razonable no puede sustentarse en suposiciones sin fundamento o estereotipos sobre la apariencia o conducta del sujeto. Además, al tratarse de un requisito que satisface el principio de legalidad de las actuaciones policiales, corresponde a la policía la carga de probar la existencia de los elementos para suponer la posible comisión de un delito flagrante.",
+     "d": "001",
+     "p": 49,
+     "et": "33",
+     "sec": "2.1 Elementos de la sospecha razonable",
+     "sen": "AI 10/2014 y acumulada 11/2014",
+     "parte": "Criterios de la Suprema Corte"
+    }
+   ]
+  },
+  {
+   "id": "nerviosa",
+   "cat": "sospecha",
+   "q": "¿La actitud nerviosa de una persona justifica una inspección?",
+   "v": [
+    "actitud nerviosa",
+    "nerviosismo justifica revisión",
+    "persona nerviosa inspección"
+   ],
+   "kw": "actitud nerviosa nerviosismo inspeccion medida seguridad excepcionalidad",
+   "facil": [
+    "No. La sola actitud nerviosa no basta.",
+    "La autoridad debe explicar con qué información contaba, de modo que cualquier persona con esos datos llegaría a la misma conclusión."
+   ],
+   "bloques": [
+    {
+     "texto": "De acuerdo con una interpretación constitucional, la inspección como medida de seguridad es una actuación legítima de las autoridades de seguridad, pero su empleo sólo es válido cuando se realiza en cumplimiento al estándar de excepcionalidad y existe una sospecha razonable. Contrariamente, la inspección no es constitucionalmente válida cuando únicamente se funda en la actitud nerviosa de la persona. Para acreditar la sospecha razonable, la autoridad deberá señalar detenidamente cuál era la información (hechos y circunstancias) con la que contaba en ese momento para suponer que la persona en cuestión estaba cometiendo una conducta ilícita. Dicha información deberá ser suficiente para que, desde un punto de vista objetivo, cualquier persona que cuente con la misma información llegue a la misma determinación que la autoridad.",
+     "d": "001",
+     "p": 52,
+     "et": "36",
+     "sec": "2.2 Actitud nerviosa",
+     "sen": "ADR 533/2015",
+     "parte": "Criterio de la Suprema Corte",
+     "p2": 53,
+     "et2": "37"
+    }
+   ]
+  },
+  {
+   "id": "evasiva",
+   "cat": "sospecha",
+   "q": "¿La actitud evasiva frente a la autoridad es suficiente para un control preventivo provisional?",
+   "v": [
+    "actitud evasiva",
+    "evadir a la policía",
+    "conducta evasiva sospecha"
+   ],
+   "kw": "actitud evasiva evasion revision precautoria elementos objetivos contexto",
+   "facil": [
+    "No, por sí sola no es suficiente.",
+    "Se necesitan elementos objetivos y analizar el contexto de los hechos."
+   ],
+   "bloques": [
+    {
+     "texto": "La actitud evasiva de una persona frente a la autoridad que detiene no es suficiente para justificar la realización de un control preventivo provisional, sin que existan más elementos que lo justifiquen. En efecto, para realizar una revisión precautoria es necesario que ésta se encuentre respaldada con elementos objetivos que permitan que el juzgador verifique que la policía actuó razonablemente. Es decir, con base en una sospecha razonable. Así, se debe analizar de manera conjunta el contexto en el que ocurrieron los hechos, entre otros elementos que pudieran resultar relevantes. De estimarse lo contrario, se estaría llegando al extremo de validar cualquier intervención al derecho a la libertad personal o a la intimidad de los ciudadanos sin otro requisito más que la apreciación subjetiva de la autoridad aprehensora.",
+     "d": "001",
+     "p": 58,
+     "et": "42",
+     "sec": "2.4 Actitud evasiva",
+     "sen": "ADR 6695/2015",
+     "parte": "Criterio de la Suprema Corte"
+    }
+   ]
+  },
+  {
+   "id": "violenta",
+   "cat": "sospecha",
+   "q": "¿La actitud violenta contra la policía constituye sospecha razonada?",
+   "v": [
+    "actitud violenta",
+    "agresión a policías sospecha",
+    "comportamiento agresivo"
+   ],
+   "kw": "actitud violenta agresiva grosera altanera policia sospecha razonada",
+   "facil": [
+    "No, por sí sola no es sospecha razonada.",
+    "La sospecha razonada exige certeza y objetividad sobre la comisión de un delito."
+   ],
+   "bloques": [
+    {
+     "texto": "La actitud violenta en contra de autoridades policiales no constituye, por sí sola, la sospecha razonada necesaria para fundar la aplicación del control preventivo provisional. De acuerdo con los precedentes de la Suprema Corte en la materia, la sospecha razonada conlleva un nivel de certeza y objetividad en torno a la comisión de un delito. Esto no ocurre, en sí mismo, con el comportamiento agresivo de un ciudadano.",
+     "d": "001",
+     "p": 60,
+     "et": "44",
+     "sec": "2.5 Actitud violenta",
+     "sen": "ADR 6826/2016",
+     "parte": "Criterio de la Suprema Corte"
+    }
+   ]
+  },
+  {
+   "id": "transito",
+   "cat": "sospecha",
+   "q": "¿Una infracción al reglamento de tránsito constituye sospecha razonable?",
+   "v": [
+    "infracción de tránsito",
+    "reglamento de tránsito sospecha razonable",
+    "estacionarse en zona prohibida"
+   ],
+   "kw": "infraccion administrativa reglamento transito estacionarse zona prohibida multa",
+   "facil": [
+    "Sí. En el ADR 4822/2014 la Suprema Corte consideró que una infracción de tránsito sí es sospecha razonable."
+   ],
+   "bloques": [
+    {
+     "texto": "La transgresión de una norma administrativa, como lo es un reglamento de tránsito (estacionarse en una zona prohibida), sí constituye una sospecha razonable. La infracción administrativa fue suficiente para realizar un control preventivo provisional y detener a la persona por la comisión en flagrancia del delito de portación de arma de fuego y cartuchos de uso exclusivo del ejército.",
+     "d": "001",
+     "p": 55,
+     "et": "39",
+     "sec": "2.3 Infracción administrativa al reglamento de tránsito",
+     "sen": "ADR 4822/2014",
+     "parte": "Criterio de la Suprema Corte"
+    }
+   ]
+  },
+  {
+   "id": "denuncia",
+   "cat": "sospecha",
+   "q": "¿Basta una denuncia informal para hacer un control preventivo provisional?",
+   "v": [
+    "denuncia informal",
+    "denuncia anónima",
+    "llamada a la policía control preventivo"
+   ],
+   "kw": "denuncia informal anonima llamada causa razonable minima grado superior coincidencia",
+   "facil": [
+    "La denuncia informal no basta por sí sola para un control de grado superior.",
+    "Los datos deben coincidir con lo que describieron las víctimas o testigos: objetos, personas, lugar y horario."
+   ],
+   "bloques": [
+    {
+     "texto": "2. Para que una autoridad realice un acto de molestia al gobernado con motivo de una denuncia informal, es necesario que haya una causa razonable mínima. Para justificar la constitucionalidad del control preventivo provisional se requiere una sospecha razonada objetiva de que la persona se encuentra cometiendo el delito, no basta con la simple sospecha subjetiva del agente aprehensor. La sospecha razonable debe de coincidir de manera objetiva con los objetos materiales del ilícito, los sujetos, lugares y horarios descritos por las víctimas o testigos de algún delito en las denuncias que haya recibido la policía previamente.",
+     "d": "001",
+     "p": 64,
+     "et": "48",
+     "sec": "2.6 Denuncia informal",
+     "sen": "ADR 3463/2012",
+     "parte": "Criterios de la Suprema Corte"
+    },
+    {
+     "texto": "La sola existencia de una denuncia informal no es suficiente para validar la implementación de un control preventivo provisional en grado superior. Éste únicamente se actualiza cuando las circunstancias objetivas y particulares en que se efectuó generan la sospecha objetiva y razonable de que se está o se estaba cometiendo un delito, cuando los sujetos corresponden ampliamente con los descritos en una denuncia previa, o bien, cuando los sujetos controlados han mostrado un alto nivel de desafío o de evasión frente a los agentes de la autoridad.",
+     "d": "001",
+     "p": 72,
+     "et": "56",
+     "sec": "2.6 Denuncia informal",
+     "sen": "ADR 6215/2016",
+     "parte": "Criterio de la Suprema Corte"
+    }
+   ]
+  },
+  {
+   "id": "vehiculo",
+   "cat": "inspeccion",
+   "q": "¿Qué requisitos debe cumplir la inspección de un vehículo?",
+   "v": [
+    "inspección de vehículos",
+    "revisión de automóvil",
+    "registro de un vehículo",
+    "juicio de proporcionalidad y juicio de urgencia"
+   ],
+   "kw": "inspeccion revision registro vehiculo automovil juicio proporcionalidad urgencia articulo 16 privacidad",
+   "facil": [
+    "Hacen falta dos juicios: uno de proporcionalidad (sospecha fundada) y otro de urgencia (por qué aquí y ahora).",
+    "En el vehículo también hay privacidad, aunque menor: se necesita sospecha razonable."
+   ],
+   "bloques": [
+    {
+     "texto": "Sin embargo, derivado de una interpretación constitucional, la decisión de realizar el registro de un vehículo exige que los agentes captores basen la inspección en: i) un juicio de proporcionalidad, en el que se justifique la existencia de una sospecha fundada de la posible comisión de un hecho delictivo, y ii) la realización de un juicio de urgencia, en el que se expliquen los motivos para realizar el registro en el acto y en el lugar (aquí y ahora), porque concurre una razón apremiante dirigida a impedir que se frustre la investigación policial que se está realizando.",
+     "d": "001",
+     "p": 78,
+     "et": "62",
+     "sec": "3.1 Inspección de vehículos y personas",
+     "sen": "ADR 1866/2013",
+     "parte": "Criterio de la Suprema Corte"
+    },
+    {
+     "texto": "1. Los parámetros de constitucionalidad referentes a la inspección de personas sí son aplicables a la inspección de vehículos. Si bien las personas gozan de una expectativa menor de privacidad dentro de un vehículo, ello no significa que en dicho entorno no se goce de privacidad alguna. En este sentido, para la realización de una inspección a un vehículo o de sus ocupantes, los agentes policiales deben justificar tal actuación en una sospecha razonable de que en ese instante se está cometiendo un delito en el interior. Tal sospecha puede sostenerse a partir de la información, datos y hechos que se presenten en el momento, así como de las circunstancias prevalecientes, las respuestas dadas por las personas, su actitud evasiva o el riesgo que perciba a su seguridad o a la de terceros, entre otros factores.",
+     "d": "001",
+     "p": 83,
+     "et": "67",
+     "sec": "3.1 Inspección de vehículos y personas",
+     "sen": "AI 10/2014 y acumulada 11/2014",
+     "parte": "Criterios de la Suprema Corte"
+    }
+   ]
+  },
+  {
+   "id": "forzosa",
+   "cat": "inspeccion",
+   "q": "¿Es constitucional la inspección forzosa de personas y sus posesiones?",
+   "v": [
+    "inspección forzosa",
+    "uso de la fuerza en la inspección",
+    "registro forzoso"
+   ],
+   "kw": "inspeccion forzosa fuerza consentimiento registro posesiones personas",
+   "facil": [
+    "Sí es constitucional, pero la fuerza no debe ser la primera opción.",
+    "Primero se pide el consentimiento; sólo si se niega, se usa la fuerza estrictamente necesaria."
+   ],
+   "bloques": [
+    {
+     "texto": "2. La inspección de personas y sus posesiones realizada de manera forzosa es constitucional. En efecto, la policía, por su propia naturaleza y funciones, goza de imperio. Es la fuerza pública misma. Sin embargo, debe subrayarse que el uso de la fuerza no puede ni debe ser, por regla general, la primera opción de actuación del agente de seguridad en la práctica de inspecciones. Primero debe solicitarse el consentimiento del sujeto para su realización y sólo en caso negativo y conforme a las circunstancias prevalecientes se podrá proceder a un registro forzoso empleando la fuerza estrictamente necesaria para ello. Asimismo, la actuación policial debe cumplir con los principios de legalidad, objetividad, eficiencia, profesionalismo y honradez.",
+     "d": "001",
+     "p": 83,
+     "et": "67",
+     "sec": "3.1 Inspección de vehículos y personas",
+     "sen": "AI 10/2014 y acumulada 11/2014",
+     "parte": "Criterios de la Suprema Corte"
+    }
+   ]
+  },
+  {
+   "id": "domicilio",
+   "cat": "inspeccion",
+   "q": "¿El control preventivo provisional permite entrar a un domicilio?",
+   "v": [
+    "ingresar al domicilio",
+    "entrar a una casa",
+    "inspección de domicilio"
+   ],
+   "kw": "domicilio casa ingresar entrar inviolabilidad intimidad propiedad",
+   "facil": [
+    "No. El control preventivo provisional no autoriza a entrar a un domicilio.",
+    "Meterse a su casa para evitar a la policía no es, por sí solo, sospecha razonable."
+   ],
+   "bloques": [
+    {
+     "texto": "1. El hecho de que una persona evada a la autoridad ingresando a un domicilio sin que se esté cometiendo un delito flagrante no puede considerarse como una sospecha razonable para dar lugar a un control preventivo provisional. Cuando una persona hace valer su derecho a la propiedad o intimidad no significa que está llevando a cabo una conducta ilícita; por el contrario, se encuentra en una posición de exigir respeto a su derecho humano. 2. El control preventivo provisional no faculta a la autoridad para ingresar en el domicilio de una persona. Las acciones de los elementos de la policía deben limitarse a realizar una simple inmediación entre ellos y las personas, para investigar, identificar y prevenir el delito.",
+     "d": "001",
+     "p": 88,
+     "et": "72",
+     "sec": "3.2 Inspección de domicilio",
+     "sen": "AR 648/2013",
+     "parte": "Criterios de la Suprema Corte"
+    }
+   ]
+  },
+  {
+   "id": "mochila",
+   "cat": "similares",
+   "q": "¿La revisión de mochilas en las escuelas es un control preventivo provisional?",
+   "v": [
+    "operativo mochila segura",
+    "revisión de mochilas",
+    "revisión a estudiantes"
+   ],
+   "kw": "mochila segura escuela estudiantes centros educativos revision posesiones acto molestia",
+   "facil": [
+    "No. Es parecida porque también es un acto de molestia, pero es otra figura.",
+    "Se hace dentro de las escuelas, sólo a estudiantes, y no requiere sospecha razonable."
+   ],
+   "bloques": [
+    {
+     "texto": "1. La revisión de las propiedades de los estudiantes en los centros educativos no equivale a un control preventivo provisional. Sin embargo, es similar, porque también es un acto de molestia, con la diferencia de que se desarrolla en el interior de los centros escolares. La revisión se realiza bajo la dirección o anuencia de las autoridades educativas con o sin la participación de la policía u otras fuerzas de seguridad.",
+     "d": "001",
+     "p": 94,
+     "et": "78",
+     "sec": "4. Figuras similares al control preventivo provisional",
+     "sen": "AR 41/2020",
+     "parte": "Criterios de la Suprema Corte"
+    },
+    {
+     "texto": "Por su parte, la revisión a las posesiones de los estudiantes en los centros educativos es un acto de molestia que no necesariamente realiza la policía; además, se realizan dentro de los planteles educativos públicos y privados; no están dirigidos a todas las personas que ingresan al plantel, sino solamente a los estudiantes. Finalmente, para realizar la revisión no se requiere la configuración de la sospecha razonable.",
+     "d": "001",
+     "p": 95,
+     "et": "79",
+     "sec": "4. Figuras similares al control preventivo provisional",
+     "sen": "AR 41/2020",
+     "parte": "Criterios de la Suprema Corte"
+    }
+   ]
+  }
+ ]
+}

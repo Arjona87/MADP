@@ -1,0 +1,1 @@
+Visor: PDF.js v4.10.38 (Mozilla, Apache 2.0). Cambios: idioma es-MX por defecto, scripts de PDF desactivados, título.
